@@ -20,7 +20,7 @@ namespace AuthenticationBasics.Controllers
             _signinManager = signinManager;
         }
 
-        [HttpPost("login")]
+        [HttpPost("login", Name ="Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             return await _Login(loginDto.Username, loginDto.Password);
@@ -48,6 +48,12 @@ namespace AuthenticationBasics.Controllers
                 return await _Login(registerDto.Username, registerDto.Password);
             }
             return BadRequest(result.Errors);
+        }
+
+        [HttpGet("notloggedin")]
+        public IActionResult NotLoggedIn()
+        {
+            return Ok(new { Message = "hit endpoint api/useractions/login to login" });
         }
 
         private async Task<IActionResult> _Login(string username, string password)

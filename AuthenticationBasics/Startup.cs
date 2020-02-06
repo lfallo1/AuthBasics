@@ -16,21 +16,26 @@ namespace AuthenticationBasics
         {
             services.AddControllers();
 
-            //services.AddAuthentication("CookieAuth")
-            //    .AddCookie("CookieAuth", config =>
-            //    {
-            //        config.Cookie.Name = "Auth.Cookie";
-            //        config.LoginPath = "/api/home/authenticate";
-            //    });
-
             services.AddDbContext<AppDbContext>(opt =>
             {
                 opt.UseSqlServer("Server=LAPTOP-733A049A;Database=IdentityAuth;Trusted_Connection=true;");
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+                {
+                    //config.Password.RequiredLength = 10;
+                    //config.Password.RequireDigit = true;
+                    //config.Lockout.MaxFailedAccessAttempts = 10;
+                    //config.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "Auth.Cookie";
+                config.LoginPath = "/api/useractions/notloggedin";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
