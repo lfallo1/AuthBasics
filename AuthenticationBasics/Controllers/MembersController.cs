@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationBasics.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Domain")]
     public class MembersController : Controller
     {
         [HttpGet]

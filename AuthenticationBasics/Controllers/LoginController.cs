@@ -41,10 +41,10 @@ namespace AuthenticationBasics.Controllers
 
             if (signinResult.Succeeded)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
-            return View("Login");
+            return View();
         }
     }
 }

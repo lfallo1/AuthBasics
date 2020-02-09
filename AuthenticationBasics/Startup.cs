@@ -1,4 +1,6 @@
+using AuthenticationBasics.AuthorizationPolicies;
 using AuthenticationBasics.DbContexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -40,6 +42,23 @@ namespace AuthenticationBasics
                 })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthorization(config =>
+            {
+                //var defaultAuthBuilder = new AuthorizationPolicyBuilder();
+                //var defaultAuthPolicy = defaultAuthBuilder
+                //    .RequireAuthenticatedUser()
+                //    .Build();
+                //config.DefaultPolicy = defaultAuthPolicy;
+
+                /* Add custom policy */
+                config.AddPolicy("Domain", policyBuilder =>
+                {
+                    policyBuilder.RequireCustomDomain("sbgtv.com");
+                });
+            });
+
+            services.AddScoped<IAuthorizationHandler, CustomRequireDomainHandler>();
 
             services.ConfigureApplicationCookie(config =>
             {

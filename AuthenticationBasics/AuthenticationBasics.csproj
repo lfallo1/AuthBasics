@@ -22,5 +22,9 @@
     <Folder Include="Views\Members\" />
     <Folder Include="Views\Register\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="AuthorizationPolicies\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="mono_crash.42f6ec106.0.json" />
   </ItemGroup>
 </Project>
