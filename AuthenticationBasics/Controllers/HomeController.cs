@@ -1,15 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using AuthenticationBasics.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using NETCore.MailKit.Core;
 
 namespace AuthenticationBasics.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class HomeController : ControllerBase
+    public class HomeController : Controller
     {
-        [HttpGet]
-        public IActionResult GetHome()
+
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signinManager;
+        private readonly IEmailService _emailService;
+
+        public HomeController(UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signinManager,
+            IEmailService emailService)
         {
-            return Ok(new { response = "Public data" });
+            _userManager = userManager;
+            _signinManager = signinManager;
+            _emailService = emailService;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
         }
     }
 }

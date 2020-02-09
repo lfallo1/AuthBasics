@@ -4,14 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace AuthenticationBasics.Controllers
 {
     [Authorize]
-    [ApiController]
-    [Route("api/[controller]")]
-    public class MembersController : ControllerBase
+    public class MembersController : Controller
     {
         [HttpGet]
-        public IActionResult GetSecretInfo()
+        public IActionResult Index()
         {
-            return Ok(new { response = "Private data" });
+            return View();
         }
     }
 }
