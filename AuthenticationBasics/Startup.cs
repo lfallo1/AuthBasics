@@ -18,7 +18,8 @@ namespace AuthenticationBasics
 
             services.AddDbContext<AppDbContext>(opt =>
             {
-                opt.UseSqlServer("Server=LAPTOP-733A049A;Database=IdentityAuth;Trusted_Connection=true;");
+                opt.UseInMemoryDatabase("AuthBasicsDb");
+                //opt.UseSqlServer("Server=LAPTOP-733A049A;Database=IdentityAuth;Trusted_Connection=true;");
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>(config =>

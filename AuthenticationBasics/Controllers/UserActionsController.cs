@@ -40,7 +40,8 @@ namespace AuthenticationBasics.Controllers
             var user = new IdentityUser
             {
                 UserName = registerDto.Username,
-                Email = registerDto.Email
+                Email = registerDto.Email,
+                PhoneNumber = registerDto.PhoneNumber
             };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (result.Succeeded)
@@ -53,7 +54,7 @@ namespace AuthenticationBasics.Controllers
         [HttpGet("notloggedin")]
         public IActionResult NotLoggedIn()
         {
-            return Ok(new { Message = "hit endpoint api/useractions/login to login" });
+            return Unauthorized(new { Message = "hit endpoint api/useractions/login to login" });
         }
 
         private async Task<IActionResult> _Login(string username, string password)
