@@ -41,6 +41,7 @@ namespace AuthenticationBasics.Controllers
                 Email = email,
                 PhoneNumber = phone
             };
+
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
